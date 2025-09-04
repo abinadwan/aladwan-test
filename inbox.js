@@ -53,6 +53,7 @@ const translations = {
 let currentLang = "ar";
 
 function addField(label, value) {
+  if (!value) return;
   const p = document.createElement("p");
   const strong = document.createElement("strong");
   strong.textContent = label;
