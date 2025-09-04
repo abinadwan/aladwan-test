@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>آخر منشورات الشركة على LinkedIn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      text-align: right;
+    }
+    .post {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>آخر 4 منشورات على LinkedIn</h1>
+  <div id="posts">
+    <!-- سيتم تحميل المنشورات هنا -->
+  </div>
+
+  <script>
+    async function fetchPosts() {
+      const accessToken = 'YOUR_ACCESS_TOKEN'; // ضع رمز الوصول الخاص بك هنا
+      const profileUrn = 'urn:li:person:YOUR_PROFILE_ID'; // استبدل YOUR_PROFILE_ID بمعرف الحساب
+      const response = await fetch(`https://api.linkedin.com/v2/shares?q=owners&owners=${profileUrn}&sortBy=LAST_MODIFIED&sharesPerOwner=4`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      const data = await response.json();
+      const postsContainer = document.getElementById('posts');
+      const posts = data.elements.slice(0, 4);
+      posts.forEach(post => {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post';
+        const text = post.text && post.text.text ? post.text.text : 'لا يوجد نص للمشاركة';
+        postDiv.innerHTML = `<p>${text}</p>`;
+        postsContainer.appendChild(postDiv);
+      });
+    }
+    fetchPosts();
+  </script>
+</body>
+</html>
