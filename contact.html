@@ -17,9 +17,9 @@
         <h3 id="formTitle">نموذج الاتصال</h3>
       </div>
       <div class="card-body">
-        <form id="contactForm" enctype="multipart/form-data" novalidate>
+        <form id="contactForm" class="needs-validation" enctype="multipart/form-data" novalidate>
           <div class="mb-3">
-            <label class="form-label" id="userTypeLabel">نوع المستخدم</label>
+            <label class="form-label required" id="userTypeLabel">نوع المستخدم</label>
             <select class="form-select" id="userType" required>
               <option value="">اختر</option>
               <option value="individual">فرد</option>
@@ -29,7 +29,7 @@
           </div>
 
           <div class="mb-3">
-            <label class="form-label" id="inquiryTypeLabel">نوع الاستفسار</label>
+            <label class="form-label required" id="inquiryTypeLabel">نوع الاستفسار</label>
             <select class="form-select" id="inquiryType" required>
               <option value="">اختر</option>
               <option value="inquiry">استفسار</option>
@@ -41,27 +41,27 @@
           </div>
 
           <div class="mb-3">
-            <label class="form-label" id="subjectLabel">عنوان الرسالة</label>
+            <label class="form-label required" id="subjectLabel">عنوان الرسالة</label>
             <input type="text" class="form-control" id="subject" maxlength="35" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" id="fullNameLabel">الاسم الكامل</label>
+            <label class="form-label required" id="fullNameLabel">الاسم الكامل</label>
             <input type="text" class="form-control" id="fullName" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" id="emailLabel">البريد الإلكتروني</label>
+            <label class="form-label required" id="emailLabel">البريد الإلكتروني</label>
             <input type="email" class="form-control" id="email" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" id="phoneLabel">رقم التواصل</label>
+            <label class="form-label required" id="phoneLabel">رقم التواصل</label>
             <input type="tel" class="form-control" id="phone" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" id="messageLabel">نص الرسالة</label>
+            <label class="form-label required" id="messageLabel">نص الرسالة</label>
             <textarea class="form-control" id="message" rows="4" required></textarea>
           </div>
 

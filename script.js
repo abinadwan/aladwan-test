@@ -94,6 +94,10 @@ document.getElementById("langToggle").addEventListener("click", () => {
 
 document.getElementById("contactForm").addEventListener("submit", function (e) {
   e.preventDefault();
+  if (!this.checkValidity()) {
+    this.classList.add('was-validated');
+    return;
+  }
 
   const inquiryText = inquiryTypeSelect.options[inquiryTypeSelect.selectedIndex].textContent;
 
@@ -113,5 +117,3 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
 });
 
 setLanguage("ar");
-
-

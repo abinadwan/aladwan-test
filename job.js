@@ -56,6 +56,10 @@ document.getElementById("langToggle").addEventListener("click", () => {
 
 document.getElementById("jobForm").addEventListener("submit", function (e) {
   e.preventDefault();
+  if (!this.checkValidity()) {
+    this.classList.add('was-validated');
+    return;
+  }
   const cvInput = document.getElementById("cvUpload");
   if (cvInput.files.length > 0) {
     const file = cvInput.files[0];
