@@ -11,63 +11,64 @@
 
   <div class="container py-5">
     <div class="card contact-card">
-      <div class="card-header contact-header text-center">
-        <h3>نموذج الاتصال</h3>
+      <div class="card-header contact-header text-center position-relative">
+        <button id="langToggle" class="btn btn-secondary btn-sm position-absolute top-0 end-0 m-2">English</button>
+        <h3 id="formTitle">نموذج الاتصال</h3>
       </div>
       <div class="card-body">
         <form id="contactForm" enctype="multipart/form-data" novalidate>
           <div class="mb-3">
-            <label class="form-label">نوع المستخدم</label>
+            <label class="form-label" id="userTypeLabel">نوع المستخدم</label>
             <select class="form-select" id="userType" required>
               <option value="">اختر</option>
-              <option>فرد</option>
-              <option>شركة</option>
-              <option>جهة حكومية</option>
+              <option value="individual">فرد</option>
+              <option value="company">شركة</option>
+              <option value="government">جهة حكومية</option>
             </select>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">نوع الاستفسار</label>
+            <label class="form-label" id="inquiryTypeLabel">نوع الاستفسار</label>
             <select class="form-select" id="inquiryType" required>
               <option value="">اختر</option>
-              <option value="وظيفة">وظيفة</option>
-              <option value="استفسار">استفسار</option>
-              <option value="شكوى">شكوى</option>
+              <option value="job">وظيفة</option>
+              <option value="question">استفسار</option>
+              <option value="complaint">شكوى</option>
             </select>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">عنوان الرسالة</label>
+            <label class="form-label" id="subjectLabel">عنوان الرسالة</label>
             <input type="text" class="form-control" id="subject" maxlength="50" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">الاسم الكامل</label>
+            <label class="form-label" id="fullNameLabel">الاسم الكامل</label>
             <input type="text" class="form-control" id="fullName" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">البريد الإلكتروني</label>
+            <label class="form-label" id="emailLabel">البريد الإلكتروني</label>
             <input type="email" class="form-control" id="email" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">رقم التواصل</label>
+            <label class="form-label" id="phoneLabel">رقم التواصل</label>
             <input type="tel" class="form-control" id="phone" required>
           </div>
 
           <div class="mb-3" id="cvField" style="display: none;">
-            <label class="form-label">تحميل السيرة الذاتية (PDF فقط - 5MB)</label>
+            <label class="form-label" id="cvLabel">تحميل السيرة الذاتية (PDF فقط - 5MB)</label>
             <input type="file" class="form-control" id="cvUpload" accept=".pdf">
           </div>
 
           <div class="mb-3" id="messageField">
-            <label class="form-label">نص الرسالة</label>
+            <label class="form-label" id="messageLabel">نص الرسالة</label>
             <textarea class="form-control" id="message" rows="4"></textarea>
           </div>
 
           <div class="d-grid">
-            <button type="submit" class="btn btn-primary">إرسال</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">إرسال</button>
           </div>
         </form>
       </div>
