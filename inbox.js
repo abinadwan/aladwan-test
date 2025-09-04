@@ -14,6 +14,7 @@ const translations = {
     inquiryType: "💬 نوع الاستفسار:",
     message: "📝 الرسالة:",
     attachment: "📎 مرفق:",
+    home: "الرئيسية",
     userTypeMap: {
       individual: "فرد",
       company: "شركة",
@@ -37,6 +38,7 @@ const translations = {
     inquiryType: "💬 Inquiry Type:",
     message: "📝 Message:",
     attachment: "📎 Attachment:",
+    home: "Home",
     userTypeMap: {
       individual: "Individual",
       company: "Company",
@@ -69,6 +71,7 @@ function render(lang) {
 
   document.getElementById("langToggle").textContent = t.langToggle;
   document.getElementById("inboxTitle").textContent = t.title;
+  document.getElementById("homeBtn").textContent = t.home;
   document.getElementById("toLabel").textContent = t.to;
   document.getElementById("subjectLabel").textContent = t.subject;
 

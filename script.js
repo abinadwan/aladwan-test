@@ -1,5 +1,7 @@
 const userTypeSelect = document.getElementById("userType");
 const inquiryTypeSelect = document.getElementById("inquiryType");
+const captchaCodeEl = document.getElementById("captchaCode");
+const captchaInput = document.getElementById("captchaInput");
 
 const translations = {
   ar: {
@@ -12,6 +14,8 @@ const translations = {
     emailLabel: "البريد الإلكتروني",
     phoneLabel: "رقم التواصل",
     messageLabel: "نص الرسالة",
+    captchaLabel: "رمز التحقق",
+    captchaError: "رمز التحقق غير صحيح",
     submitBtn: "إرسال",
     userTypeOptions: {
       placeholder: "اختر",
@@ -38,6 +42,8 @@ const translations = {
     emailLabel: "Email",
     phoneLabel: "Phone Number",
     messageLabel: "Message",
+    captchaLabel: "Captcha",
+    captchaError: "Incorrect captcha",
     submitBtn: "Send",
     userTypeOptions: {
       placeholder: "Select",
@@ -72,6 +78,7 @@ function setLanguage(lang) {
   document.getElementById("emailLabel").textContent = t.emailLabel;
   document.getElementById("phoneLabel").textContent = t.phoneLabel;
   document.getElementById("messageLabel").textContent = t.messageLabel;
+  document.getElementById("captchaLabel").textContent = t.captchaLabel;
   document.getElementById("submitBtn").textContent = t.submitBtn;
 
   userTypeSelect.querySelector("option[value='']").textContent = t.userTypeOptions.placeholder;
@@ -92,10 +99,29 @@ document.getElementById("langToggle").addEventListener("click", () => {
   setLanguage(currentLang);
 });
 
+function generateCaptcha() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+function refreshCaptcha() {
+  captchaValue = generateCaptcha();
+  captchaCodeEl.textContent = captchaValue;
+}
+
+let captchaValue;
+refreshCaptcha();
+
 document.getElementById("contactForm").addEventListener("submit", function (e) {
   e.preventDefault();
   if (!this.checkValidity()) {
     this.classList.add('was-validated');
+    return;
+  }
+
+  if (captchaInput.value !== captchaValue) {
+    alert(translations[currentLang].captchaError);
+    refreshCaptcha();
+    captchaInput.value = "";
     return;
   }
 
