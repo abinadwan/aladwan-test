@@ -30,24 +30,16 @@
       display: none;
       margin-top: 10px;
     }
-    .lang-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
-    }
   </style>
 </head>
 <body>
-
-  <!-- زر تبديل اللغة -->
-  <button class="btn btn-outline-dark lang-toggle" id="langToggle">English</button>
-
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-9 col-lg-8">
         <div class="card jobs-card">
-          <div class="card-header jobs-header">
+          <div class="card-header jobs-header text-center position-relative">
+            <a id="homeBtn" href="index.html" class="btn btn-secondary btn-sm position-absolute top-0 start-0 m-2">الرئيسية</a>
+            <button id="langToggle" class="btn btn-secondary btn-sm position-absolute top-0 end-0 m-2">English</button>
             <h3 id="pageHeading">الوظائف المتاحة</h3>
             <p id="pageSubHeading">نرحب بالمواهب المؤهلة للانضمام إلى فريقنا</p>
           </div>
@@ -139,7 +131,7 @@
               <button class="btn btn-outline-secondary btn-sm" id="backBtn">
                 العودة إلى النموذج
               </button>
-              <a href="index.html" class="btn btn-primary btn-sm ms-2" id="homeBtn">الرئيسية</a>
+              <a href="index.html" class="btn btn-primary btn-sm ms-2" id="homeBtnBottom">الرئيسية</a>
             </div>
           </div>
         </div>
@@ -150,6 +142,7 @@
   <script>
     const translations = {
       ar: {
+        langToggle: "English",
         pageHeading: "الوظائف المتاحة",
         pageSubHeading: "نرحب بالمواهب المؤهلة للانضمام إلى فريقنا",
         subjectLabel: "عنوان الرسالة (35 حرفًا كحد أقصى)",
@@ -169,6 +162,7 @@
         bodyLabel: "تفاصيل الطلب:",
         backBtn: "العودة إلى النموذج",
         homeBtn: "الرئيسية",
+        homeBtnBottom: "الرئيسية",
         captchaLabel: "رمز التحقق",
         captchaError: "رمز التحقق غير صحيح",
         spamMessage: "يحتوي النموذج على محتوى غير مسموح به. يُرجى التحقق من المدخلات.",
@@ -177,6 +171,7 @@
         suspiciousContent: "تم اكتشاف محتوى مشبوه (روابط، تعليمات برمجية)."
       },
       en: {
+        langToggle: "العربية",
         pageHeading: "Available Jobs",
         pageSubHeading: "We welcome qualified talents to join our team",
         subjectLabel: "Subject (max 35 characters)",
@@ -196,6 +191,7 @@
         bodyLabel: "Application Details:",
         backBtn: "Back to Form",
         homeBtn: "Home",
+        homeBtnBottom: "Home",
         captchaLabel: "Captcha",
         captchaError: "Incorrect captcha",
         spamMessage: "The form contains prohibited content. Please review your inputs.",
@@ -207,6 +203,16 @@
 
     let currentLang = 'ar';
 
+    function setLanguage(lang) {
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = lang;
+      Object.keys(translations.ar).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) element.textContent = translations[lang][key];
+      });
+      document.getElementById('phone').placeholder = '+966 XXX XXX XXXX';
+    }
+
     let captchaValue;
     const generateCaptcha = () => Math.floor(1000 + Math.random() * 9000).toString();
     const refreshCaptcha = () => {
@@ -215,20 +221,11 @@
     };
     refreshCaptcha();
 
-    // تبديل اللغة
     document.getElementById('langToggle').addEventListener('click', function () {
       currentLang = currentLang === 'ar' ? 'en' : 'ar';
-      this.textContent = currentLang === 'ar' ? 'English' : 'العربية';
-      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-      document.documentElement.lang = currentLang;
-
-      Object.keys(translations.ar).forEach(key => {
-        const element = document.getElementById(key);
-        if (element) element.textContent = translations[currentLang][key];
-      });
-
-      document.getElementById('phone').placeholder = currentLang === 'ar' ? '+966 XXX XXX XXXX' : '+966 XXX XXX XXXX';
+      setLanguage(currentLang);
     });
+    setLanguage('ar');
 
     // عداد الأحرف
     document.getElementById("subject").addEventListener("input", function () {
