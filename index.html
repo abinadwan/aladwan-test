@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>معرض صور إنستقرام</title>
+  <style>
+    .instagram-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .instagram-gallery img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <h1>معرض صور من حساب إنستقرام</h1>
+  <a href="https://www.instagram.com/aladwanrealestate/" target="_blank">انتقل إلى حساب إنستقرام</a>
+  <div id="insta-gallery" class="instagram-gallery"></div>
+  <script>
+    async function fetchInstagram() {
+      // استبدل YOUR_ACCESS_TOKEN بتوكن صالح من Instagram Basic Display API
+      const response = await fetch('https://graph.instagram.com/me/media?fields=id,media_url,permalink&access_token=YOUR_ACCESS_TOKEN');
+      const data = await response.json();
+
+      const container = document.getElementById('insta-gallery');
+      data.data.forEach(item => {
+        const link = document.createElement('a');
+        link.href = item.permalink;
+        link.target = '_blank';
+
+        const img = document.createElement('img');
+        img.src = item.media_url;
+        link.appendChild(img);
+
+        container.appendChild(link);
+      });
+    }
+
+    fetchInstagram();
+  </script>
+</body>
+</html>
