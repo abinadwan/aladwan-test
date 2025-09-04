@@ -5,79 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>اتصل بنا - شركة العدوان</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <style>
-    body {
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3d1e8 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 40px 0;
-    }
-    .contact-card {
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      background-color: #ffffff;
-      overflow: hidden;
-    }
-    .contact-header {
-      background-color: #1a3a6e;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      border-radius: 0 !important;
-    }
-    .form-control:focus {
-      border-color: #1a3a6e;
-      box-shadow: 0 0 0 0.2rem rgba(26, 58, 110, 0.25);
-    }
-    .btn-primary {
-      background-color: #1a3a6e;
-      border: none;
-      padding: 10px 30px;
-      font-size: 1.1rem;
-    }
-    .btn-primary:hover {
-      background-color: #2c5282;
-    }
-    .job-fields {
-      display: none;
-      margin-top: 15px;
-      padding: 15px;
-      background-color: #f8f9fa;
-      border-radius: 8px;
-      border: 1px dashed #1a3a6e;
-    }
-    .email-preview {
-      display: none;
-      background-color: #f0f4f8;
-      border: 1px solid #d0d8e8;
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 20px;
-      font-family: monospace;
-      line-height: 1.6;
-    }
-    .email-to,
-    .email-subject,
-    .email-body {
-      margin: 10px 0;
-      padding: 8px;
-      background-color: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-    }
-    .lang-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
-    }
-    .text-start {
-      text-align: start !important;
-    }
-  </style>
+  <link href="style.css" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- زر تبديل اللغة -->
   <button class="btn btn-outline-light lang-toggle" id="langToggle">English</button>
 
   <div class="container">
@@ -166,7 +97,7 @@
             </form>
           </div>
 
-          <!-- عرض البريد الإلكتروني بعد الإرسال -->
+          <!-- عرض البريد الإلكتروني -->
           <div class="card-body email-preview" id="emailPreview">
             <h5 id="emailTitle">تم إرسال الرسالة بنجاح</h5>
             <p id="emailDesc">تم توجيه الاستفسار كرسالة بريد إلكتروني إلى:</p>
@@ -190,174 +121,12 @@
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-    const translations = {
-      ar: {
-        pageTitle: "اتصل بنا",
-        pageSubtitle: "نرحب باستفساراتك ومقترحاتك",
-        userTypeLabel: "نوع المستخدم",
-        inquiryTypeLabel: "نوع الاستفسار",
-        subjectLabel: "عنوان الرسالة (20 حرفًا كحد أقصى)",
-        fullNameLabel: "الاسم الكامل",
-        emailLabel: "البريد الإلكتروني",
-        phoneLabel: "رقم التواصل",
-        messageLabel: "نص الاستفسار",
-        jobSectionTitle: "معلومات الوظيفة",
-        jobTitleLabel: "المسمى الوظيفي المطلوب",
-        cvUploadLabel: "رفع السيرة الذاتية (CV)",
-        fileHelpText: "الملفات المسموحة: PDF, DOC, DOCX - الحد الأقصى: 5 ميجابايت",
-        charCountText: "عدد الأحرف",
-        submitBtn: "إرسال",
-        emailTitle: "تم إرسال الرسالة بنجاح",
-        emailDesc: "تم توجيه الاستفسار كرسالة بريد إلكتروني إلى:",
-        toLabel: "إلى:",
-        subjectLabelEmail: "الموضوع:",
-        bodyLabel: "المحتوى:",
-        backBtn: "العودة إلى النموذج",
-      },
-      en: {
-        pageTitle: "Contact Us",
-        pageSubtitle: "We welcome your inquiries and suggestions",
-        userTypeLabel: "User Type",
-        inquiryTypeLabel: "Inquiry Type",
-        subjectLabel: "Subject (max 20 characters)",
-        fullNameLabel: "Full Name",
-        emailLabel: "Email Address",
-        phoneLabel: "Phone Number",
-        messageLabel: "Inquiry Message",
-        jobSectionTitle: "Job Information",
-        jobTitleLabel: "Desired Job Title",
-        cvUploadLabel: "Upload CV",
-        fileHelpText: "Allowed files: PDF, DOC, DOCX - Max 5 MB",
-        charCountText: "Characters",
-        submitBtn: "Submit",
-        emailTitle: "Message Sent Successfully",
-        emailDesc: "The inquiry has been sent as an email to:",
-        toLabel: "To:",
-        subjectLabelEmail: "Subject:",
-        bodyLabel: "Content:",
-        backBtn: "Back to Form",
-      }
-    };
-
-    let currentLang = 'ar';
-
-    // تبديل اللغة
-    document.getElementById('langToggle').addEventListener('click', function () {
-      currentLang = currentLang === 'ar' ? 'en' : 'ar';
-      this.textContent = currentLang === 'ar' ? 'English' : 'العربية';
-      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-      document.documentElement.lang = currentLang;
-
-      Object.keys(translations.ar).forEach(key => {
-        const element = document.getElementById(key);
-        if (element) element.textContent = translations[currentLang][key];
-      });
-
-      document.querySelectorAll('option[data-en]').forEach(opt => {
-        opt.textContent = currentLang === 'ar' ? opt.value : opt.getAttribute('data-en');
-      });
-
-      document.getElementById('phone').placeholder = currentLang === 'ar' ? '+966 XXX XXX XXXX' : '+966 XXX XXX XXXX';
-    });
-
-    // عداد الأحرف
-    document.getElementById("subject").addEventListener("input", function () {
-      document.getElementById("charCount").textContent = this.value.length;
-    });
-
-    // عرض/إخفاء حقول الوظائف
-    document.getElementById("inquiryType").addEventListener("change", function () {
-      const jobFields = document.getElementById("jobFields");
-      const messageField = document.getElementById("messageField");
-      const selectedValue = this.options[this.selectedIndex].getAttribute('data-en') || this.value;
-
-      if (selectedValue === 'Job Inquiry' || this.value === 'وظيفة') {
-        jobFields.style.display = "block";
-        messageField.style.display = "none";
-      } else {
-        jobFields.style.display = "none";
-        messageField.style.display = "block";
-      }
-    });
-
-    // عرض البريد الإلكتروني بعد الإرسال
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      if (!this.checkValidity()) {
-        alert(currentLang === 'ar' ? 'يرجى تعبئة جميع الحقول المطلوبة.' : 'Please fill in all required fields.');
-        return;
-      }
-
-      const form = this;
-      const inquiryType = document.getElementById("inquiryType").value;
-      const isJob = inquiryType === "وظيفة" || document.querySelector("#inquiryType option:checked").getAttribute('data-en') === 'Job Inquiry';
-      const recipient = isJob ? "career@aladwan.sa" : "info@aladwan.sa";
-
-      // عرض نموذج البريد
-      document.getElementById("formContainer").style.display = "none";
-      const preview = document.getElementById("emailPreview");
-      preview.style.display = "block";
-
-      document.getElementById("recipientEmail").textContent = recipient;
-      document.getElementById("displaySubject").textContent = document.getElementById("subject").value || "(بلا عنوان)";
-
-      let body = "";
-      const userType = document.getElementById("userType").value;
-      const fullName = document.getElementById("fullName").value;
-      const email = document.getElementById("email").value;
-      const phone = document.getElementById("phone").value;
-      const subject = document.getElementById("subject").value;
-
-      if (isJob) {
-        const jobTitle = document.getElementById("jobTitle").value;
-        body = `
-          <strong>نوع المستخدم:</strong> ${userType}<br>
-          <strong>الاسم الكامل:</strong> ${fullName}<br>
-          <strong>البريد الإلكتروني:</strong> ${email}<br>
-          <strong>رقم التواصل:</strong> ${phone}<br>
-          <strong>نوع الاستفسار:</strong> وظيفة<br>
-          <strong>المسمى الوظيفي:</strong> ${jobTitle || "غير محدد"}<br>
-          <strong>ملاحظات:</strong> تم رفع السيرة الذاتية.
-        `;
-      } else {
-        const message = document.getElementById("message").value;
-        body = `
-          <strong>نوع المستخدم:</strong> ${userType}<br>
-          <strong>الاسم الكامل:</strong> ${fullName}<br>
-          <strong>البريد الإلكتروني:</strong> ${email}<br>
-          <strong>رقم التواصل:</strong> ${phone}<br>
-          <strong>نوع الاستفسار:</strong> ${inquiryType}<br>
-          <strong>نص الرسالة:</strong><br>
-          ${message.replace(/\n/g, '<br>')}
-        `;
-      }
-
-      document.getElementById("emailBody").innerHTML = body;
-
-      // تحديث الترجمات في العرض
-      Object.keys(translations.ar).forEach(key => {
-        const element = document.getElementById(key);
-        if (element) element.textContent = translations[currentLang][key];
-      });
-    });
-
-    // العودة إلى النموذج
-    document.getElementById("backBtn").addEventListener("click", function () {
-      document.getElementById("emailPreview").style.display = "none";
-      document.getElementById("formContainer").style.display = "block";
-      document.getElementById("contactForm").reset();
-      document.getElementById("charCount").textContent = "0";
-      document.getElementById("jobFields").style.display = "none";
-      document.getElementById("messageField").style.display = "block";
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
