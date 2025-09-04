@@ -1,6 +1,7 @@
 const translations = {
   ar: {
     langToggle: "English",
+    homeBtn: "الرئيسية",
     formTitle: "نموذج التوظيف",
     subjectLabel: "عنوان الرسالة",
     fullNameLabel: "الاسم الكامل",
@@ -16,6 +17,7 @@ const translations = {
   },
   en: {
     langToggle: "العربية",
+    homeBtn: "Home",
     formTitle: "Job Application",
     subjectLabel: "Subject",
     fullNameLabel: "Full Name",
@@ -39,6 +41,7 @@ function setLanguage(lang) {
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
   document.getElementById("langToggle").textContent = t.langToggle;
+  document.getElementById("homeBtn").textContent = t.homeBtn;
   document.getElementById("formTitle").textContent = t.formTitle;
   document.getElementById("subjectLabel").textContent = t.subjectLabel;
   document.getElementById("fullNameLabel").textContent = t.fullNameLabel;
@@ -85,3 +88,4 @@ document.getElementById("jobForm").addEventListener("submit", function (e) {
 });
 
 setLanguage("ar");
+

@@ -12,11 +12,12 @@
   <div class="container py-5">
     <div class="card contact-card">
       <div class="card-header contact-header text-center position-relative">
+        <a href="index.html" id="homeBtn" class="btn btn-secondary btn-sm position-absolute top-0 start-0 m-2">الرئيسية</a>
         <button id="langToggle" class="btn btn-secondary btn-sm position-absolute top-0 end-0 m-2">English</button>
         <h3 id="formTitle">نموذج الاتصال</h3>
       </div>
       <div class="card-body">
-        <form id="contactForm" enctype="multipart/form-data" novalidate>
+        <form id="contactForm" novalidate>
           <div class="mb-3">
             <label class="form-label" id="userTypeLabel">نوع المستخدم</label>
             <select class="form-select" id="userType" required>
@@ -31,15 +32,17 @@
             <label class="form-label" id="inquiryTypeLabel">نوع الاستفسار</label>
             <select class="form-select" id="inquiryType" required>
               <option value="">اختر</option>
-              <option value="job">وظيفة</option>
-              <option value="question">استفسار</option>
-              <option value="complaint">شكوى</option>
+              <option value="inquiry">استفسار</option>
+              <option value="investment">استثمار</option>
+              <option value="development">تطوير عقاري</option>
+              <option value="opportunity">فرصة عقارية</option>
+              <option value="other">اخرى</option>
             </select>
           </div>
 
           <div class="mb-3">
             <label class="form-label" id="subjectLabel">عنوان الرسالة</label>
-            <input type="text" class="form-control" id="subject" maxlength="50" required>
+            <input type="text" class="form-control" id="subject" maxlength="35" required>
           </div>
 
           <div class="mb-3">
@@ -57,12 +60,7 @@
             <input type="tel" class="form-control" id="phone" required>
           </div>
 
-          <div class="mb-3" id="cvField" style="display: none;">
-            <label class="form-label" id="cvLabel">تحميل السيرة الذاتية (PDF فقط - 5MB)</label>
-            <input type="file" class="form-control" id="cvUpload" accept=".pdf" required>
-          </div>
-
-          <div class="mb-3" id="messageField">
+          <div class="mb-3">
             <label class="form-label" id="messageLabel">نص الرسالة</label>
             <textarea class="form-control" id="message" rows="4" required></textarea>
           </div>

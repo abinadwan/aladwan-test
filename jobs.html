@@ -11,6 +11,7 @@
   <div class="container py-5">
     <div class="card contact-card">
       <div class="card-header contact-header text-center position-relative">
+        <a href="index.html" id="homeBtn" class="btn btn-secondary btn-sm position-absolute top-0 start-0 m-2">الرئيسية</a>
         <button id="langToggle" class="btn btn-secondary btn-sm position-absolute top-0 end-0 m-2">English</button>
         <h3 id="formTitle">نموذج التوظيف</h3>
       </div>
@@ -18,7 +19,7 @@
         <form id="jobForm" enctype="multipart/form-data" novalidate>
           <div class="mb-3">
             <label class="form-label" id="subjectLabel">عنوان الرسالة</label>
-            <input type="text" class="form-control" id="subject" maxlength="50" required>
+            <input type="text" class="form-control" id="subject" maxlength="35" required>
           </div>
           <div class="mb-3">
             <label class="form-label" id="fullNameLabel">الاسم الكامل</label>

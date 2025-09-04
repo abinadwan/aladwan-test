@@ -1,10 +1,10 @@
 const userTypeSelect = document.getElementById("userType");
 const inquiryTypeSelect = document.getElementById("inquiryType");
-const jobOption = inquiryTypeSelect.querySelector("option[value='job']");
 
 const translations = {
   ar: {
     langToggle: "English",
+    homeBtn: "الرئيسية",
     formTitle: "نموذج الاتصال",
     userTypeLabel: "نوع المستخدم",
     inquiryTypeLabel: "نوع الاستفسار",
@@ -12,7 +12,6 @@ const translations = {
     fullNameLabel: "الاسم الكامل",
     emailLabel: "البريد الإلكتروني",
     phoneLabel: "رقم التواصل",
-    cvLabel: "تحميل السيرة الذاتية (PDF فقط - 5MB)",
     messageLabel: "نص الرسالة",
     submitBtn: "إرسال",
     userTypeOptions: {
@@ -23,17 +22,16 @@ const translations = {
     },
     inquiryTypeOptions: {
       placeholder: "اختر",
-      job: "وظيفة",
-      question: "استفسار",
-      complaint: "شكوى"
-    },
-    alerts: {
-      pdf: "⚠️ يجب أن يكون الملف بصيغة PDF",
-      size: "⚠️ الحد الأقصى لحجم السيرة الذاتية هو 5 ميجابايت"
+      inquiry: "استفسار",
+      investment: "استثمار",
+      development: "تطوير عقاري",
+      opportunity: "فرصة عقارية",
+      other: "اخرى"
     }
   },
   en: {
     langToggle: "العربية",
+    homeBtn: "Home",
     formTitle: "Contact Form",
     userTypeLabel: "User Type",
     inquiryTypeLabel: "Inquiry Type",
@@ -41,7 +39,6 @@ const translations = {
     fullNameLabel: "Full Name",
     emailLabel: "Email",
     phoneLabel: "Phone Number",
-    cvLabel: "Upload CV (PDF only - 5MB)",
     messageLabel: "Message",
     submitBtn: "Send",
     userTypeOptions: {
@@ -52,13 +49,11 @@ const translations = {
     },
     inquiryTypeOptions: {
       placeholder: "Select",
-      job: "Job",
-      question: "Inquiry",
-      complaint: "Complaint"
-    },
-    alerts: {
-      pdf: "⚠️ File must be PDF",
-      size: "⚠️ CV size limit is 5MB"
+      inquiry: "Inquiry",
+      investment: "Investment",
+      development: "Real Estate Development",
+      opportunity: "Real Estate Opportunity",
+      other: "Other"
     }
   }
 };
@@ -71,6 +66,7 @@ function setLanguage(lang) {
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
   document.getElementById("langToggle").textContent = t.langToggle;
+  document.getElementById("homeBtn").textContent = t.homeBtn;
   document.getElementById("formTitle").textContent = t.formTitle;
   document.getElementById("userTypeLabel").textContent = t.userTypeLabel;
   document.getElementById("inquiryTypeLabel").textContent = t.inquiryTypeLabel;
@@ -78,7 +74,6 @@ function setLanguage(lang) {
   document.getElementById("fullNameLabel").textContent = t.fullNameLabel;
   document.getElementById("emailLabel").textContent = t.emailLabel;
   document.getElementById("phoneLabel").textContent = t.phoneLabel;
-  document.getElementById("cvLabel").textContent = t.cvLabel;
   document.getElementById("messageLabel").textContent = t.messageLabel;
   document.getElementById("submitBtn").textContent = t.submitBtn;
 
@@ -88,9 +83,11 @@ function setLanguage(lang) {
   userTypeSelect.querySelector("option[value='government']").textContent = t.userTypeOptions.government;
 
   inquiryTypeSelect.querySelector("option[value='']").textContent = t.inquiryTypeOptions.placeholder;
-  inquiryTypeSelect.querySelector("option[value='job']").textContent = t.inquiryTypeOptions.job;
-  inquiryTypeSelect.querySelector("option[value='question']").textContent = t.inquiryTypeOptions.question;
-  inquiryTypeSelect.querySelector("option[value='complaint']").textContent = t.inquiryTypeOptions.complaint;
+  inquiryTypeSelect.querySelector("option[value='inquiry']").textContent = t.inquiryTypeOptions.inquiry;
+  inquiryTypeSelect.querySelector("option[value='investment']").textContent = t.inquiryTypeOptions.investment;
+  inquiryTypeSelect.querySelector("option[value='development']").textContent = t.inquiryTypeOptions.development;
+  inquiryTypeSelect.querySelector("option[value='opportunity']").textContent = t.inquiryTypeOptions.opportunity;
+  inquiryTypeSelect.querySelector("option[value='other']").textContent = t.inquiryTypeOptions.other;
 }
 
 document.getElementById("langToggle").addEventListener("click", () => {
@@ -98,67 +95,22 @@ document.getElementById("langToggle").addEventListener("click", () => {
   setLanguage(currentLang);
 });
 
-userTypeSelect.addEventListener("change", function () {
-  const hideJob = this.value === "company" || this.value === "government";
-  jobOption.hidden = hideJob;
-  if (hideJob && inquiryTypeSelect.value === "job") {
-    inquiryTypeSelect.value = "";
-    inquiryTypeSelect.dispatchEvent(new Event("change"));
-  }
-});
-
-inquiryTypeSelect.addEventListener("change", function () {
-  const isJob = this.value === "job";
-  const cvField = document.getElementById("cvField");
-  const cvInput = document.getElementById("cvUpload");
-  const messageField = document.getElementById("messageField");
-  const messageInput = document.getElementById("message");
-
-  cvField.style.display = isJob ? "block" : "none";
-  cvInput.required = isJob;
-
-  messageField.style.display = isJob ? "none" : "block";
-  messageInput.required = !isJob;
-});
-
 document.getElementById("contactForm").addEventListener("submit", function (e) {
   e.preventDefault();
-
-  const cvInput = document.getElementById("cvUpload");
-  const isJob = inquiryTypeSelect.value === "job";
-
-  if (isJob && cvInput.files.length > 0) {
-    const file = cvInput.files[0];
-    const ext = file.name.split(".").pop().toLowerCase();
-    if (ext !== "pdf") {
-      alert(translations[currentLang].alerts.pdf);
-      return;
-    }
-    if (file.size > 5 * 1024 * 1024) {
-      alert(translations[currentLang].alerts.size);
-      return;
-    }
-  }
-
-  const to = isJob ? "career@example.com" : "info@example.com";
   const inquiryText = inquiryTypeSelect.options[inquiryTypeSelect.selectedIndex].textContent;
-
   const params = new URLSearchParams({
-    to,
+    to: "info@example.com",
     subject: `${inquiryText} - ${document.getElementById("subject").value}`,
     name: document.getElementById("fullName").value,
     email: document.getElementById("email").value,
     phone: document.getElementById("phone").value,
     userType: userTypeSelect.value,
     inquiryType: inquiryTypeSelect.value,
-    message: document.getElementById("message").value || "",
-    filename: isJob && cvInput.files.length > 0 ? cvInput.files[0].name : ""
+    message: document.getElementById("message").value
   });
 
   window.location.href = `inbox.html?${params.toString()}`;
 });
 
 setLanguage("ar");
-
-inquiryTypeSelect.dispatchEvent(new Event("change"));
 
