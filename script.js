@@ -12,6 +12,11 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
 
   if (isJob && cvInput.files.length > 0) {
     const file = cvInput.files[0];
+    const ext = file.name.split(".").pop().toLowerCase();
+    if (ext !== "pdf") {
+      alert("⚠️ يجب أن يكون الملف بصيغة PDF");
+      return;
+    }
     if (file.size > 5 * 1024 * 1024) {
       alert("⚠️ الحد الأقصى لحجم السيرة الذاتية هو 5 ميجابايت");
       return;

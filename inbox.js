@@ -7,21 +7,44 @@ const params = getParams();
 document.getElementById("toEmail").textContent = params.get("to");
 document.getElementById("emailSubject").textContent = params.get("subject");
 
-const bodyHTML = `
-  <p><strong>👤 الاسم:</strong> ${params.get("name")}</p>
-  <p><strong>📧 البريد:</strong> ${params.get("email")}</p>
-  <p><strong>📱 الهاتف:</strong> ${params.get("phone")}</p>
-  <p><strong>🏷️ نوع المستخدم:</strong> ${params.get("userType")}</p>
-  <p><strong>💬 نوع الاستفسار:</strong> ${params.get("inquiryType")}</p>
-  ${params.get("message") ? `<p><strong>📝 الرسالة:</strong><br>${params.get("message").replace(/\n/g, "<br>")}</p>` : ""}
-`;
+const bodyContainer = document.getElementById("emailBody");
+function addField(label, value) {
+  const p = document.createElement("p");
+  const strong = document.createElement("strong");
+  strong.textContent = label;
+  p.appendChild(strong);
+  p.append(` ${value}`);
+  bodyContainer.appendChild(p);
+}
 
-document.getElementById("emailBody").innerHTML = bodyHTML;
+addField("👤 الاسم:", params.get("name"));
+addField("📧 البريد:", params.get("email"));
+addField("📱 الهاتف:", params.get("phone"));
+addField("🏷️ نوع المستخدم:", params.get("userType"));
+addField("💬 نوع الاستفسار:", params.get("inquiryType"));
 
-// مرفق
+const message = params.get("message");
+if (message) {
+  const p = document.createElement("p");
+  const strong = document.createElement("strong");
+  strong.textContent = "📝 الرسالة:";
+  p.appendChild(strong);
+  p.appendChild(document.createElement("br"));
+  message.split("\n").forEach((line, idx) => {
+    if (idx > 0) p.appendChild(document.createElement("br"));
+    p.append(line);
+  });
+  bodyContainer.appendChild(p);
+}
+
 const filename = params.get("filename");
 if (filename) {
-  document.getElementById("attachment").innerHTML = `
-    <p><strong>📎 مرفق:</strong> ${filename}</p>
-  `;
+  const attachment = document.getElementById("attachment");
+  const p = document.createElement("p");
+  const strong = document.createElement("strong");
+  strong.textContent = "📎 مرفق:";
+  p.appendChild(strong);
+  p.append(` ${filename}`);
+  attachment.appendChild(p);
 }
+
