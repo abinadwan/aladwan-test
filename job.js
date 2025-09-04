@@ -8,6 +8,8 @@ const translations = {
     phoneLabel: "رقم التواصل",
     messageLabel: "الموضوع",
     cvLabel: "تحميل السيرة الذاتية (PDF فقط - 5MB)",
+    captchaLabel: "رمز التحقق",
+    captchaError: "رمز التحقق غير صحيح",
     submitBtn: "إرسال",
     alerts: {
       pdf: "⚠️ يجب أن يكون الملف بصيغة PDF",
@@ -23,6 +25,8 @@ const translations = {
     phoneLabel: "Phone Number",
     messageLabel: "Message",
     cvLabel: "Upload CV (PDF only - 5MB)",
+    captchaLabel: "Captcha",
+    captchaError: "Incorrect captcha",
     submitBtn: "Send",
     alerts: {
       pdf: "⚠️ File must be PDF",
@@ -46,6 +50,7 @@ function setLanguage(lang) {
   document.getElementById("phoneLabel").textContent = t.phoneLabel;
   document.getElementById("messageLabel").textContent = t.messageLabel;
   document.getElementById("cvLabel").textContent = t.cvLabel;
+  document.getElementById("captchaLabel").textContent = t.captchaLabel;
   document.getElementById("submitBtn").textContent = t.submitBtn;
 }
 
@@ -54,10 +59,31 @@ document.getElementById("langToggle").addEventListener("click", () => {
   setLanguage(currentLang);
 });
 
+const captchaCodeEl = document.getElementById("captchaCode");
+const captchaInput = document.getElementById("captchaInput");
+
+function generateCaptcha() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+function refreshCaptcha() {
+  captchaValue = generateCaptcha();
+  captchaCodeEl.textContent = captchaValue;
+}
+
+let captchaValue;
+refreshCaptcha();
+
 document.getElementById("jobForm").addEventListener("submit", function (e) {
   e.preventDefault();
   if (!this.checkValidity()) {
     this.classList.add('was-validated');
+    return;
+  }
+  if (captchaInput.value !== captchaValue) {
+    alert(translations[currentLang].captchaError);
+    refreshCaptcha();
+    captchaInput.value = "";
     return;
   }
   const cvInput = document.getElementById("cvUpload");
