@@ -10,14 +10,51 @@
 <body>
   <div class="container py-5">
     <div class="card jobs-card text-center">
-      <div class="card-header jobs-header">
-        <h3>شركة العدوان</h3>
+      <div class="card-header jobs-header text-center position-relative">
+        <button id="langToggle" class="btn btn-secondary btn-sm position-absolute top-0 end-0 m-2">English</button>
+        <h3 id="siteTitle">شركة العدوان</h3>
       </div>
       <div class="card-body d-grid gap-3">
-        <a href="contact.html" class="btn btn-primary btn-lg">اتصل بنا</a>
-        <a href="jobs.html" class="btn btn-secondary btn-lg">الوظائف</a>
+        <a id="contactBtn" href="contact.html" class="btn btn-primary btn-lg">اتصل بنا</a>
+        <a id="jobsBtn" href="jobs.html" class="btn btn-secondary btn-lg">الوظائف</a>
       </div>
     </div>
   </div>
+
+  <script>
+    const translations = {
+      ar: {
+        langToggle: 'English',
+        siteTitle: 'شركة العدوان',
+        contactBtn: 'اتصل بنا',
+        jobsBtn: 'الوظائف'
+      },
+      en: {
+        langToggle: 'العربية',
+        siteTitle: 'Aladwan Company',
+        contactBtn: 'Contact Us',
+        jobsBtn: 'Jobs'
+      }
+    };
+
+    let currentLang = 'ar';
+
+    function setLanguage(lang) {
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('langToggle').textContent = t.langToggle;
+      document.getElementById('siteTitle').textContent = t.siteTitle;
+      document.getElementById('contactBtn').textContent = t.contactBtn;
+      document.getElementById('jobsBtn').textContent = t.jobsBtn;
+    }
+
+    document.getElementById('langToggle').addEventListener('click', () => {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      setLanguage(currentLang);
+    });
+
+    setLanguage('ar');
+  </script>
 </body>
 </html>

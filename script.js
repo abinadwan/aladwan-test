@@ -17,6 +17,7 @@ const translations = {
     captchaLabel: "رمز التحقق",
     captchaError: "رمز التحقق غير صحيح",
     submitBtn: "إرسال",
+    homeBtn: "الرئيسية",
     userTypeOptions: {
       placeholder: "اختر",
       individual: "فرد",
@@ -45,6 +46,7 @@ const translations = {
     captchaLabel: "Captcha",
     captchaError: "Incorrect captcha",
     submitBtn: "Send",
+    homeBtn: "Home",
     userTypeOptions: {
       placeholder: "Select",
       individual: "Individual",
@@ -80,6 +82,7 @@ function setLanguage(lang) {
   document.getElementById("messageLabel").textContent = t.messageLabel;
   document.getElementById("captchaLabel").textContent = t.captchaLabel;
   document.getElementById("submitBtn").textContent = t.submitBtn;
+  document.getElementById("homeBtn").textContent = t.homeBtn;
 
   userTypeSelect.querySelector("option[value='']").textContent = t.userTypeOptions.placeholder;
   userTypeSelect.querySelector("option[value='individual']").textContent = t.userTypeOptions.individual;
