@@ -1,7 +1,7 @@
 body {
-  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
-  font-family: 'Segoe UI', sans-serif;
-  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 60px 0;
 }
 
 .required::after {
@@ -9,9 +9,35 @@ body {
   color: #dc3545;
 }
 
+.jobs-card {
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.jobs-header {
+  background: #1a3a6e;
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #1a3a6e;
+  box-shadow: 0 0 0 0.2rem rgba(26, 58, 110, 0.25);
+}
+
 .btn-primary {
-  background: linear-gradient(90deg, #0d47a1 0%, #1976d2 100%);
+  background-color: #1a3a6e;
   border: none;
+  padding: 10px 30px;
+  font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+  background-color: #2c5282;
 }
 
 .btn-secondary {
@@ -19,27 +45,6 @@ body {
   border: none;
 }
 
-.btn-primary:hover,
 .btn-secondary:hover {
   opacity: 0.9;
-}
-
-.contact-card {
-  max-width: 700px;
-  margin: auto;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.contact-header {
-  background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
-  color: white;
-  padding: 20px;
-  border-radius: 15px 15px 0 0;
-}
-
-.form-control:focus,
-.form-select:focus {
-  border-color: #1976d2;
-  box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.25);
 }
