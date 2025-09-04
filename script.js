@@ -109,8 +109,16 @@ userTypeSelect.addEventListener("change", function () {
 
 inquiryTypeSelect.addEventListener("change", function () {
   const isJob = this.value === "job";
-  document.getElementById("cvField").style.display = isJob ? "block" : "none";
-  document.getElementById("messageField").style.display = isJob ? "none" : "block";
+  const cvField = document.getElementById("cvField");
+  const cvInput = document.getElementById("cvUpload");
+  const messageField = document.getElementById("messageField");
+  const messageInput = document.getElementById("message");
+
+  cvField.style.display = isJob ? "block" : "none";
+  cvInput.required = isJob;
+
+  messageField.style.display = isJob ? "none" : "block";
+  messageInput.required = !isJob;
 });
 
 document.getElementById("contactForm").addEventListener("submit", function (e) {
@@ -151,4 +159,6 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
 });
 
 setLanguage("ar");
+
+inquiryTypeSelect.dispatchEvent(new Event("change"));
 
